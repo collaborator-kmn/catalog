@@ -1,4 +1,4 @@
-# vue-template
+# catalog
 
 ## Project setup
 ```

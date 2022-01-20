@@ -14,8 +14,8 @@
     </properties>
 
     <modules>
-        <module>catalog-backend</module>
         <module>catalog-frontend</module>
+        <module>catalog-backend</module>
     </modules>
 
 </project>
