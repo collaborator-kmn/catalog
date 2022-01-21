@@ -1,0 +1,11 @@
+catalog:
+  camunda-udc-properties:
+    url: url
+    user: username
+    password: password
+
+spring:
+  security:
+    user:
+      name: user
+      password: user

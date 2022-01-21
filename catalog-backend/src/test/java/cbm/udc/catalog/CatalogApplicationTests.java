@@ -1,10 +1,10 @@
-package ogr.template.fullstack.springboottemplate;
+package cbm.udc.catalog;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBootTemplateApplicationTests {
+class CatalogApplicationTests {
 
 	@Test
 	void contextLoads() {
