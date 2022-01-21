@@ -65,6 +65,7 @@
             onClick() {
                 if (this.$refs.form.validate()) {
                     this.item.curators.push({name: this.curator});
+                    this.curator = '';
                 }
             },
             save() {
@@ -73,6 +74,8 @@
             },
             close() {
                 this.$refs.form.resetValidation();
+                this.curator = '';
+                this.item = {};
                 this.$emit('close');
             },
             remove(item) {
@@ -88,8 +91,7 @@
             value: {
                 immediate: true,
                 handler(val) {
-                    console.log(val)
-                    this.item = Object.assign({}, val);
+                    this.item = JSON.parse(JSON.stringify(val));
                 }
             }
         }

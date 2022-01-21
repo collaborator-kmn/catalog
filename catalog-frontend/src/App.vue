@@ -1,6 +1,7 @@
 <template>
     <v-app>
         <v-main class="background">
+            <v-form method="post" action="/logout" />
             <v-container>
                 <v-overlay :value="loading">
                     <v-row>
@@ -18,6 +19,9 @@
                         <v-toolbar-title>Каталог кураторов клиентов</v-toolbar-title>
                         <v-spacer />
                         <v-btn outlined @click="saveOnServer">сохранить</v-btn>
+                        <v-form method="post" action="/logout">
+                            <v-btn outlined type="submit">exit</v-btn>
+                        </v-form>
                     </v-toolbar>
                 </v-card>
                 <v-card outlined class="mt-3">
@@ -45,7 +49,7 @@ export default {
             const resp = await fetch('http://localhost:8081/catalog');
             this.catalog = await resp.json();
         } catch (e) {
-            alert('Произошла ошибка при получениее данных!')
+            alert('Произошла ошибка при получении данных!')
         } finally {
             this.loading = false;
         }
@@ -55,10 +59,8 @@ export default {
         loading: false,
         catalog: [
             {
-                arm: "internal_arm_1", boss: "internal_boss_1",
-                curators: [
-                    {name: "curator_1"},
-                    {name: "curator_2"}
+                arm: "internal_arm_1", boss: "internal_boss_1", curators: [
+                    {name: "curator_1"}, {name: "curator_2"}
                 ]
             },
             {
