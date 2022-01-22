@@ -1,5 +1,4 @@
 <template>
-
     <v-card>
         <v-toolbar color="primary" dark flat>
                 <v-icon>mdi-close</v-icon>
