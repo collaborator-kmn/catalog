@@ -80,7 +80,7 @@
 							<resources>
 								<resource>
 									<directory>../catalog-frontend/dist</directory>
-									<filtering>true</filtering>
+<!--									<filtering>true</filtering>-->
 								</resource>
 							</resources>
 						</configuration>
