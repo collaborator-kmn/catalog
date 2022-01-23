@@ -14,7 +14,7 @@
                         <v-text-field placeholder="Куратор" dense hide-details outlined v-model="curator" required :rules="[v => !!v ||'Обязательное поле']"></v-text-field>
                     </v-col>
                     <v-col cols="2">
-                        <v-btn @click="onClick">добавить</v-btn>
+                        <v-btn text color="primary" @click="onClick">добавить</v-btn>
                     </v-col>
                     <v-col cols="12"/>
                 </v-row>
@@ -38,7 +38,7 @@
         </v-form>
         <v-divider />
         <v-card-actions>
-            <v-btn @click="save">сохранить</v-btn>
+            <v-btn color="primary" @click="save">сохранить</v-btn>
         </v-card-actions>
     </v-card>
 </template>
@@ -79,7 +79,8 @@
                 this.$emit('close');
             },
             remove(item) {
-                this.item.curators.splice(item, 1);
+                const index = this.item.curators.findIndex(e => e === item);
+                this.item.curators.splice(index, 1);
             }
         },
         computed: {
