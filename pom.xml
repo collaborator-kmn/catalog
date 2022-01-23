@@ -9,6 +9,7 @@
     <version>1.0</version>
     <packaging>pom</packaging>
 
+
     <properties>
         <main.basedir>${project.basedir}</main.basedir>
     </properties>
@@ -17,5 +18,22 @@
         <module>catalog-frontend</module>
         <module>catalog-backend</module>
     </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>properties.plugin</groupId>
+                    <artifactId>Lazaruss-maven-plugin</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+
+                    <configuration>
+                        <strategy>${strategy}</strategy>
+                    </configuration>
+
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>

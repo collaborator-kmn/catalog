@@ -19,8 +19,8 @@
                         <v-toolbar-title>Каталог кураторов клиентов</v-toolbar-title>
                         <v-spacer />
                         <v-btn outlined @click="saveOnServer">сохранить</v-btn>
-                        <v-form method="post" action="/logout">
-                            <v-btn outlined type="submit">exit</v-btn>
+                        <v-form method="get" action="/logout">
+                            <v-btn outlined type="submit">выйти</v-btn>
                         </v-form>
                     </v-toolbar>
                 </v-card>
@@ -46,7 +46,7 @@ export default {
     async mounted() {
         this.loading = true;
         try {
-            const resp = await fetch('http://localhost:8081/catalog');
+            const resp = await fetch(process.env.VUE_APP_BACKEND_URL+ '/catalog');
             this.catalog = await resp.json();
         } catch (e) {
             alert('Произошла ошибка при получении данных!')
@@ -90,7 +90,7 @@ export default {
             this.close();
         },
         saveOnServer() {
-
+          console.log(process.env.VUE_APP_BACKEND_URL)
         }
     },
     computed: {

@@ -61,3 +61,14 @@ L
 catalog-frontend/src/App.vue,f\e\fe95f6149cb281592b84f66445ce336345b2634f
 E
 catalog-frontend/.env,4\8\482bd275ff5ada8df14fa862f03d322d85a14988
+~
+Ncatalog-backend/src/main/java/cbm/udc/catalog/controller/LogoutController.java,1\5\15282248d15e1f5d576ebd6c0b443367236a4b86
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+M
+catalog-frontend/.env.preprod,f\7\f7ad2cef458830bfc7fb5fcb6bddb1c0e0ee9419
+J
+catalog-frontend/.env.prod,e\5\e59c25177ba495619c162e31097441e19a8f86bb
+K
+catalog-frontend/.env.local,d\e\de9d6361c3bf4d6499609beb52ba422770f52568

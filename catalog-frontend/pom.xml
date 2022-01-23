@@ -8,6 +8,19 @@
     <artifactId>catalog-frontend</artifactId>
     <version>0.0.1</version>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <strategy.name>local</strategy.name>
+            </properties>
+        </profile>
+
+    </profiles>
+
     <description>Vue JS frontend for catalog</description>
 
     <build>
@@ -30,6 +43,9 @@
                             <arguments>
                                 <argument>run</argument>
                                 <argument>build</argument>
+                                <argument>--</argument>
+                                <argument>--mode</argument>
+                                <argument>${strategy.name}</argument>
                             </arguments>
                         </configuration>
                     </execution>
