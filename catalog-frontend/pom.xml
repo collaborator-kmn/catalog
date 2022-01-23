@@ -32,6 +32,20 @@
                 <version>3.0.0</version>
                 <executions>
                     <execution>
+                        <id>npm install the vue app</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>${basedir}</workingDirectory>
+                            <executable>npm</executable>
+                            <arguments>
+                                <argument>install</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>npm build the vue app</id>
                         <phase>generate-resources</phase>
                         <goals>
