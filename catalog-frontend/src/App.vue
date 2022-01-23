@@ -20,7 +20,7 @@
 
                     <v-btn :disabled="!hasChanges" text class="mr-3" @click="saveOnServer">сохранить</v-btn>
                     <v-form method="get" action="/logout">
-                        <v-btn text type="submit">exit</v-btn>
+                        <v-btn text type="submit">выйти</v-btn>
                     </v-form>
                 </v-app-bar>
                 <v-container>
