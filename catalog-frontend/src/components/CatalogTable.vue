@@ -4,6 +4,7 @@
             :items="catalog"
             disable-pagination
             hide-default-footer
+            no-data-text="Нет данных"
     >
         <template v-slot:[`item.curators`]="{ item }">
             <v-icon
