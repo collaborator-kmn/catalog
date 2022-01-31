@@ -1,11 +1,12 @@
 <template>
     <v-app>
         <v-main class="background">
+            <message v-if="message" :value="message" @close="message = null"></message>
             <v-form method="post" action="/logout" />
             <v-container fluid>
                 <v-overlay :value="loading">
                     <v-row>
-                        Получение данных
+                        Выполнение запроса
                     </v-row>
                     <v-row>
                         <v-progress-circular
@@ -17,10 +18,9 @@
                 <v-app-bar app dark color="primary" flat>
                     <v-toolbar-title>Каталог кураторов клиентов</v-toolbar-title>
                     <v-spacer />
-
                     <v-btn :disabled="!hasChanges" text class="mr-3" @click="saveOnServer">сохранить</v-btn>
-                    <v-form method="get" action="/logout">
-                        <v-btn text type="submit">выйти</v-btn>
+                    <v-form method="post" action="/logout">
+                        <v-btn text type="submit">Выход</v-btn>
                     </v-form>
                 </v-app-bar>
                 <v-container>
@@ -37,21 +37,25 @@
 </template>
 
 <script>
-import CatalogTable from "@/components/CatalogTable";
+import CatalogTable from "./components/CatalogTable";
 import CatalogEdit from "./components/CatalogEdit";
+import Message from "./components/Message";
 import {Catalog} from "./entity/Catalog";
 import {deepEquals} from "./utils";
+import {api} from "./modules";
+import {ERROR, Notification} from "./modules/Notification";
 
 export default {
     name: 'App',
-    components: {CatalogEdit, CatalogTable},
+    components: {CatalogEdit, CatalogTable, Message},
     async mounted() {
         this.loading = true;
         try {
-            const resp = await fetch(process.env.VUE_APP_BACKEND_URL+ '/catalog');
-            this.catalog = await resp.json();
+            const resp = await api.load();
+            this.originalData = JSON.parse(JSON.stringify(resp));
+            this.catalog = resp;
         } catch (e) {
-            alert('Произошла ошибка при получении данных!')
+            this.message = Notification.defaultError();
         } finally {
             this.loading = false;
         }
@@ -61,20 +65,10 @@ export default {
         hasChanges: false,
         dialog: false,
         loading: false,
-        catalog: [
-            {
-                arm: "internal_arm_1", boss: "internal_boss_1", curators: [
-                    {name: "curator_1"}, {name: "curator_2"}
-                ]
-            },
-            {
-                arm: "internal_arm_2", boss: "internal_boss_2", curators: [
-                    {name: "curator_3"}, {name: "curator_4"}
-                ]
-            }
-        ],
+        catalog: [],
         editedItem: new Catalog({}),
-        editedIndex: -1
+        editedIndex: -1,
+        message: null
     }),
     methods: {
         checkChanges() {
@@ -95,11 +89,21 @@ export default {
         onSave(item) {
             this.$set(this.catalog, this.editedIndex, item);
             this.hasChanges = this.checkChanges();
-            console.log(this.hasChanges);
             this.close();
         },
-        saveOnServer() {
-
+        async saveOnServer() {
+            this.loading = true;
+            try {
+                const resp = await api.save(this.catalog);
+                this.originalData = JSON.parse(JSON.stringify(resp));
+                this.catalog = resp;
+                this.hasChanges = true;
+                this.message = Notification.defaultSuccess();
+            } catch (e) {
+                this.message = new Notification(ERROR, 'Произошла ошибка при обновлении кураторов!');
+            } finally {
+                this.loading = false;
+            }
         }
     },
     computed: {
