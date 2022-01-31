@@ -10,10 +10,10 @@ import java.util.List;
  * Nickolay Burdiladze
  */
 @Service
-public class DefaultCatalogService implements CatalogService<List<CatalogDto>> {
+public class DefaultCatalogService implements CatalogService<CatalogDto> {
 
     @Override
-    public List<CatalogDto> catalog() {
+    public List<CatalogDto> getCatalog() {
         return List.of(
                 CatalogDto.builder()
                         .arm("arm_1")
@@ -25,5 +25,10 @@ public class DefaultCatalogService implements CatalogService<List<CatalogDto>> {
                         ))
                         .build()
         );
+    }
+
+    @Override
+    public List<CatalogDto> saveCatalog(List<CatalogDto> catalog) {
+        return catalog;
     }
 }

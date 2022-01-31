@@ -1,10 +1,13 @@
 "use strict";
 
-const url = `http://localhost:8081/catalog`;
+const url = process.env.VUE_APP_BACKEND_URL
+const catalogUrl = '/catalog'
+const getCatalog = url + catalogUrl+ '/get'
+const updateCatalog = url +catalogUrl + '/save'
 
 export const api = {
     async load() {
-        const response = await fetch(url);
+        const response = await fetch(getCatalog);
 
         if (!response.ok) {
            throw Error("Request failed");
@@ -14,7 +17,7 @@ export const api = {
     },
 
     async save(catalogs) {
-        const response = await fetch(url, {
+        const response = await fetch(updateCatalog, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

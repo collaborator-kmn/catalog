@@ -2,11 +2,11 @@ package cbm.udc.catalog.controller;
 
 import cbm.udc.catalog.dto.CatalogDto;
 import cbm.udc.catalog.service.CatalogService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,23 +14,25 @@ import java.util.List;
  * Nickolay Burdiladze
  */
 @RestController
+@RequestMapping("/catalog")
+@Slf4j
+@RequiredArgsConstructor
 public class CatalogController {
+    @Autowired
+    private CatalogService<CatalogDto> remoteCatalogService;
 
     @Autowired
-    private CatalogService<List<CatalogDto>> defaultCatalogService;
+    private CatalogService<CatalogDto> defaultCatalogService;
 
-    @GetMapping("/catalog")
+    @GetMapping("/get")
     public ResponseEntity<List<CatalogDto>> catalog() {
-        return ResponseEntity.ok(defaultCatalogService.catalog());
+        return ResponseEntity.ok(defaultCatalogService.getCatalog());
     }
 
-    @PostMapping("/update-catalog")
-    public ResponseEntity<Void> update() {
-        return ResponseEntity.ok().build();
-    }
+    @PostMapping("/save")
+    public ResponseEntity<List<CatalogDto>> update(@RequestBody List<CatalogDto> value) {
+        log.info("Update catalog: {}", value);
 
-    @PostMapping("/refresh-consumers")
-    public ResponseEntity<Void> refresh() {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(defaultCatalogService.saveCatalog(value));
     }
 }

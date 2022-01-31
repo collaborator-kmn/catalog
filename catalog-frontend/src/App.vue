@@ -19,7 +19,7 @@
                     <v-toolbar-title>Каталог кураторов клиентов</v-toolbar-title>
                     <v-spacer />
                     <v-btn :disabled="!hasChanges" text class="mr-3" @click="saveOnServer">сохранить</v-btn>
-                    <v-form method="post" action="/logout">
+                    <v-form method="get" action="/logout">
                         <v-btn text type="submit">Выход</v-btn>
                     </v-form>
                 </v-app-bar>

@@ -15,7 +15,7 @@ public class CatalogProperties {
     private CamundaUdcProperties camundaUdcProperties;
 
     @Data
-    static class CamundaUdcProperties {
+    public static class CamundaUdcProperties {
         private String url;
         private String user;
         private String password;
